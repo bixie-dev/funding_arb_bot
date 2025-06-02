@@ -1,0 +1,4 @@
+thresholds:
+  price_diff: 2.0
+  funding_diff: 0.005
+auto_trade: false

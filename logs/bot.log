@@ -1,0 +1,11 @@
+[2025-06-02 12:46:25,839] INFO - [Hyperliquid] Balance: 10000
+[2025-06-02 12:46:25,865] INFO - [Hyperliquid] Attempting to open limit position | Coin: ETH, Size: 10, Leverage: 5
+[2025-06-02 12:46:25,866] INFO - [Hyperliquid] Opened position: {'coin': 'ETH', 'size': 10, 'leverage': 5, 'order_type': 'limit', 'entry_price': 100, 'pnl': 0, 'funding': 0.1}
+[2025-06-02 12:46:25,866] INFO - [Hyperliquid] Open positions: {'ETH_long': {'coin': 'ETH', 'size': 10, 'leverage': 5, 'order_type': 'limit', 'entry_price': 100, 'pnl': 0, 'funding': 0.1}}
+[2025-06-02 12:46:25,867] INFO - [Hyperliquid] Closing position: {'coin': 'ETH', 'size': 10, 'leverage': 5, 'order_type': 'limit', 'entry_price': 100, 'pnl': 0, 'funding': 0.1}
+[2025-06-02 12:48:46,942] INFO - [Hyperliquid] Attempting to open limit position | Coin: BTC, Size: 1, Leverage: 3
+[2025-06-02 12:48:47,476] INFO - [Hyperliquid] Opened position: {'coin': 'BTC', 'size': 1, 'leverage': 3, 'order_type': 'limit', 'entry_price': 100, 'pnl': 0, 'funding': 0.01}
+[2025-06-02 12:48:47,480] INFO - [Hyperliquid] Open positions: {'BTC_long': {'coin': 'BTC', 'size': 1, 'leverage': 3, 'order_type': 'limit', 'entry_price': 100, 'pnl': 0, 'funding': 0.01}}
+[2025-06-02 12:48:47,481] INFO - [Hyperliquid] Open positions: {'BTC_long': {'coin': 'BTC', 'size': 1, 'leverage': 3, 'order_type': 'limit', 'entry_price': 100, 'pnl': 0, 'funding': 0.01}}
+[2025-06-02 12:48:47,481] INFO - [Hyperliquid] Closing position: {'coin': 'BTC', 'size': 1, 'leverage': 3, 'order_type': 'limit', 'entry_price': 100, 'pnl': 0, 'funding': 0.01}
+[2025-06-02 12:48:47,482] INFO - [Hyperliquid] Open positions: {}
