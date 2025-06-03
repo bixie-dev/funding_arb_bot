@@ -1,4 +1,10 @@
-thresholds:
-  price_diff: 2.0
-  funding_diff: 0.005
 auto_trade: false
+bybit:
+  api_key: lkwUK5mL1xkWExdV2R
+  api_secret: 4bhbkKaafpTN4Dd0mE7gScgLkfqdy3mc4vfs
+hyperliquid:
+  api_key: '0x25079223ab397678d573a167da1d2ac51fb8a376d73744583b608a6b22b1a96e'
+  wallet: '0x806ec9f3c9cfd5a40a8f01b6a1ac795496f9a08b'
+thresholds:
+  funding_diff: 0.005
+  price_diff: 2.0
