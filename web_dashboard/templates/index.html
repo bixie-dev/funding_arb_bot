@@ -1,57 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Funding Arbitrage Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funding Rates Dashboard</title>
   <style>
     body {
-    font-family: Arial, sans-serif;
-    padding: 2rem;
-    background: #111;
-    color: #eee;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
     }
-    h1 {
-        color: #f9d342;
+    .container {
+      display: flex;
+      width: 100%;
+    }
+    .table-section {
+      flex: 3;
+      padding: 20px;
+    }
+    .panel-section {
+      flex: 1;
+      background-color: #ffffff;
+      padding: 20px;
+      border-left: 1px solid #ddd;
     }
     table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
     }
     th, td {
-        padding: 12px;
-        border-bottom: 1px solid #444;
-        text-align: center;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      text-align: center;
     }
     th {
-        background-color: #222;
+      background-color: #f1f1f1;
     }
-    tr:hover {
-        background-color: #333;
+    tr:nth-child(even) {
+      background-color: #fefefe;
     }
-    .profitable {
-        color: #00ff5f;
+    .green { color: green; }
+    .red { color: red; }
+    .orange { color: orange; }
+    .form-group {
+      margin-bottom: 15px;
     }
-    .skip {
-        color: #ff4040;
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
     }
   </style>
 </head>
 <body>
-  <h1>Funding Arbitrage Opportunities</h1>
-  <table id="arb-table">
-    <thead>
-      <tr>
-        <th>Exchange 1</th>
-        <th>Exchange 2</th>
-        <th>Price Diff ($)</th>
-        <th>Funding Diff (%)</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+  <div class="container">
+    <div class="table-section">
+      <h2>Funding Rates Dashboard</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Binance</th>
+            <th>OKX</th>
+            <th>Bybit</th>
+            <th>Vertex</th>
+            <th>Bitget</th>
+            <th>BingX</th>
+            <th>Gate</th>
+            <th>Crypto.com</th>
+            <th>Bitunix</th>
+            <th>MEXC</th>
+            <th>WhiteBIT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BTC</td>
+            <td class="green">0.0026%</td>
+            <td>0.0100%</td>
+            <td class="red">-0.0001%</td>
+            <td>0.0060%</td>
+            <td>0.0100%</td>
+            <td>0.0098%</td>
+            <td>0.0100%</td>
+            <td class="red">-0.0028%</td>
+            <td class="green">0.0026%</td>
+            <td class="green">0.0025%</td>
+            <td>0.0100%</td>
+          </tr>
+          <tr>
+            <td>ETH</td>
+            <td>0.0076%</td>
+            <td>0.0084%</td>
+            <td>0.0100%</td>
+            <td>0.0065%</td>
+            <td class="green">0.0021%</td>
+            <td>0.0098%</td>
+            <td class="green">0.0048%</td>
+            <td class="green">0.0001%</td>
+            <td>0.0076%</td>
+            <td>0.0076%</td>
+            <td>0.0100%</td>
+          </tr>
+          <tr>
+            <td>SOL</td>
+            <td>0.0053%</td>
+            <td>0.0052%</td>
+            <td class="green">0.0036%</td>
+            <td class="green">0.0033%</td>
+            <td class="green">0.0001%</td>
+            <td>0.0052%</td>
+            <td>0.0096%</td>
+            <td class="red">0.0074%</td>
+            <td class="green">0.0050%</td>
+            <td>0.0053%</td>
+            <td>0.0100%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel-section">
+      <h3>Trading Panel</h3>
+      <div class="form-group">
+        <label for="symbol">Coin</label>
+        <select id="symbol">
+          <option value="BTC">BTC</option>
+          <option value="ETH">ETH</option>
+          <option value="SOL">SOL</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exchange">Exchange</label>
+        <select id="exchange">
+          <option value="binance">Binance</option>
+          <option value="okx">OKX</option>
+          <option value="bybit">Bybit</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="size">Size</label>
+        <input type="number" id="size" placeholder="Enter position size" style="width: -webkit-fill-available;"/>
+      </div>
+      <div class="form-group">
+        <label for="leverage">Leverage</label>
+        <input type="number" id="leverage" placeholder="Enter leverage" style="width: -webkit-fill-available;"/>
+      </div>
+      <div class="form-group">
+        <label for="orderType">Order Type</label>
+        <select id="orderType">
+          <option value="market">Market</option>
+          <option value="limit">Limit</option>
+        </select>
+      </div>
+      <button>Submit Order</button>
+    </div>
+  </div>
 
   <script>
     async function fetchData() {

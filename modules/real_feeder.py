@@ -1,70 +1,53 @@
 
-import asyncio
-import websockets
-import json
-import time
+import requests
+from exchanges.hyperliquid import HyperliquidExchange
+from exchanges.bybit import BybitExchange
 
-class RealFundingFeeder:
-    def __init__(self, callback):
-        self.callback = callback
+def fetch_from_hyperliquid():
+    try:
+        client = HyperliquidExchange()
+        result = client.get_open_positions()
+        if(result):
+            return {}
+        url = "https://api.hyperliquid.xyz/info"
+        payload = {"type": "meta"}
+        response = requests.post(url, json=payload)
+        response.raise_for_status()
+        data = response.json()
 
-    async def start(self):
-        await asyncio.gather(
-            self._connect_bybit(),
-            self._connect_dydx()
-        )
+        funding_info = {}
+        for coin_data in data.get("universe", []):
+            coin = coin_data.get("name")
+            rate = coin_data.get("fundingRateHourly", 0)
+            funding_info[coin] = round(float(rate), 6)
+        return funding_info
+    except Exception as e:
+        print(f"Hyperliquid error: {e}")
+        return {}
 
-    async def _connect_bybit(self):
-        url = "wss://stream.bybit.com/v5/public/linear"
-        async with websockets.connect(url) as ws:
-            sub_msg = {
-                "op": "subscribe",
-                "args": ["funding.rate.BTCUSDT"]
-            }
-            await ws.send(json.dumps(sub_msg))
+def fetch_from_bybit():
+    try:
+        client = BybitExchange()
+        result = client.get_open_positions()
+        if(result):
+            return {}
+        url = "https://api-testnet.bybit.com/v2/public/tickers"
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
 
-            while True:
-                try:
-                    msg = await ws.recv()
-                    data = json.loads(msg)
-                    if 'data' in data:
-                        funding = float(data['data']['fundingRate'])
-                        update = {
-                            "exchange": "bybit",
-                            "coin": "BTC",
-                            "funding_rate": funding,
-                            "spread": 0.02,  # Mock spread
-                            "timestamp": time.time()
-                        }
-                        self.callback(update)
-                except Exception as e:
-                    print(f"[BYBIT ERROR] {e}")
-                    await asyncio.sleep(5)
+        funding_info = {}
+        for item in data.get("result", []):
+            symbol = item.get("symbol", "")
+            if "USDT" in symbol:
+                funding_info[symbol] = 0.0001  # Placeholder (actual rate needs auth call)
+        return funding_info
+    except Exception as e:
+        print(f"Bybit error: {e}")
+        return {}
 
-    async def _connect_dydx(self):
-        url = "wss://api.dydx.exchange/v3/ws"
-        async with websockets.connect(url) as ws:
-            sub_msg = {
-                "type": "subscribe",
-                "channel": "v3_markets"
-            }
-            await ws.send(json.dumps(sub_msg))
-
-            while True:
-                try:
-                    msg = await ws.recv()
-                    data = json.loads(msg)
-                    if data.get("type") == "channel_data" and "markets" in data["contents"]:
-                        eth = data["contents"]["markets"].get("ETH-USD", {})
-                        funding = float(eth.get("nextFundingRate", 0))
-                        update = {
-                            "exchange": "dydx",
-                            "coin": "ETH",
-                            "funding_rate": funding,
-                            "spread": 0.015,
-                            "timestamp": time.time()
-                        }
-                        self.callback(update)
-                except Exception as e:
-                    print(f"[DYDX ERROR] {e}")
-                    await asyncio.sleep(5)
+def fetch_funding_data():
+    funding_data = {}
+    funding_data.update(fetch_from_hyperliquid())
+    funding_data.update(fetch_from_bybit())  # will overwrite Hyperliquid coins if symbol matches
+    return funding_data

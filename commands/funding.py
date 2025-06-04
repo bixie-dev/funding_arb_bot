@@ -1,7 +1,7 @@
-from funding_dashboard.dashboard import fetch_mock_funding_data
+from funding_dashboard.dashboard import fetch_realtime_funding_data
 
 def detect_arbitrage_opportunities(funding_threshold=0.004, price_threshold=2.0):   
-    data = fetch_mock_funding_data()
+    data = fetch_realtime_funding_data()
     opportunities = []
 
     exchanges = list(data.keys())
