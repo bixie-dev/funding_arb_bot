@@ -10,7 +10,7 @@ def index():
 
 @app.route('/api/arbitrage')
 def api_arbitrage():
-    opportunities = asyncio.run(detect_arbitrage_opportunities())
+    opportunities = detect_arbitrage_opportunities()
     return jsonify(opportunities)
 
 if __name__ == "__main__":

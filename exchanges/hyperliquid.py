@@ -1,10 +1,12 @@
 from exchanges.base_exchange import BaseExchange
 from utils.logger import logger
+from config.config_loader import get_config
 
 class Hyperliquid(BaseExchange):
-    def __init__(self, api_key=None, api_secret=None):
-        self.api_key = api_key
-        self.api_secret = api_secret
+    def __init__(self):
+        config = get_config()
+        self.api_key = config['hyperliquid']['api_key']
+        self.api_secret = config['hyperliquid']['wallet']
         self.positions = {{}}
         self.balance = 10000
         self.funding_rate = 0.01

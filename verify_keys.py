@@ -1,11 +1,10 @@
 
-from exchanges.bybit import BybitExchange
-from exchanges.hyperliquid import HyperliquidExchange
-
+from exchanges.bybit import Bybit
+from exchanges.hyperliquid import Hyperliquid
 def test_bybit():
     print("Testing Bybit API credentials...")
     try:
-        client = BybitExchange()
+        client = Bybit()
         result = client.get_balance()
         print("✅ Raw response from Bybit get_balance():")
         print(result)
@@ -15,7 +14,7 @@ def test_bybit():
 def test_hyperliquid():
     print("Testing Hyperliquid API credentials...")
     try:
-        client = HyperliquidExchange()
+        client = Hyperliquid()
         result = client.get_balance()
         print("✅ Raw response from Hyperliquid get_balance():")
         print(result)

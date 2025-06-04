@@ -1,8 +1,5 @@
+# from modules.data_feeder import fetch_funding_data
 import os
-import random
-import asyncio
-import websockets
-import json
 
 DEBUG_MODE = os.getenv("DEBUG_MODE", "0") == "0"
 
@@ -13,8 +10,6 @@ else:
     from modules.real_feeder import fetch_funding_data
     print("📡 Using real-time funding data (real_feeder)")
 
-
-async def fetch_realtime_funding_data():
+def fetch_realtime_funding_data():
     funding_data = fetch_funding_data()
     return funding_data
-        

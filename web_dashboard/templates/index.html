@@ -71,72 +71,29 @@
     button:hover {
       background-color: #218838;
     }
+    .profitable {
+        color:rgb(0, 17, 255);
+    }
+    .skip {
+        color: #ff4040;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="table-section">
       <h2>Funding Rates Dashboard</h2>
-      <table>
+      <table id="arb-table">
         <thead>
           <tr>
-            <th>Symbol</th>
-            <th>Binance</th>
-            <th>OKX</th>
-            <th>Bybit</th>
-            <th>Vertex</th>
-            <th>Bitget</th>
-            <th>BingX</th>
-            <th>Gate</th>
-            <th>Crypto.com</th>
-            <th>Bitunix</th>
-            <th>MEXC</th>
-            <th>WhiteBIT</th>
+            <th>Exchange 1</th>
+            <th>Exchange 2</th>
+            <th>Price Diff ($)</th>
+            <th>Funding Diff (%)</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>BTC</td>
-            <td class="green">0.0026%</td>
-            <td>0.0100%</td>
-            <td class="red">-0.0001%</td>
-            <td>0.0060%</td>
-            <td>0.0100%</td>
-            <td>0.0098%</td>
-            <td>0.0100%</td>
-            <td class="red">-0.0028%</td>
-            <td class="green">0.0026%</td>
-            <td class="green">0.0025%</td>
-            <td>0.0100%</td>
-          </tr>
-          <tr>
-            <td>ETH</td>
-            <td>0.0076%</td>
-            <td>0.0084%</td>
-            <td>0.0100%</td>
-            <td>0.0065%</td>
-            <td class="green">0.0021%</td>
-            <td>0.0098%</td>
-            <td class="green">0.0048%</td>
-            <td class="green">0.0001%</td>
-            <td>0.0076%</td>
-            <td>0.0076%</td>
-            <td>0.0100%</td>
-          </tr>
-          <tr>
-            <td>SOL</td>
-            <td>0.0053%</td>
-            <td>0.0052%</td>
-            <td class="green">0.0036%</td>
-            <td class="green">0.0033%</td>
-            <td class="green">0.0001%</td>
-            <td>0.0052%</td>
-            <td>0.0096%</td>
-            <td class="red">0.0074%</td>
-            <td class="green">0.0050%</td>
-            <td>0.0053%</td>
-            <td>0.0100%</td>
-          </tr>
         </tbody>
       </table>
     </div>

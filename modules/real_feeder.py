@@ -1,11 +1,11 @@
 
 import requests
-from exchanges.hyperliquid import HyperliquidExchange
-from exchanges.bybit import BybitExchange
+from exchanges.hyperliquid import Hyperliquid
+from exchanges.bybit import Bybit
 
 def fetch_from_hyperliquid():
     try:
-        client = HyperliquidExchange()
+        client = Hyperliquid()
         result = client.get_open_positions()
         if(result):
             return {}
@@ -27,7 +27,7 @@ def fetch_from_hyperliquid():
 
 def fetch_from_bybit():
     try:
-        client = BybitExchange()
+        client = Bybit()
         result = client.get_open_positions()
         if(result):
             return {}

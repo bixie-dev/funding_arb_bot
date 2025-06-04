@@ -1,6 +1,7 @@
 from funding_dashboard.dashboard import fetch_realtime_funding_data
+import asyncio
 
-def detect_arbitrage_opportunities(funding_threshold=0.004, price_threshold=2.0):   
+def detect_arbitrage_opportunities(funding_threshold=0.004, price_threshold=2.0):
     data = fetch_realtime_funding_data()
     opportunities = []
 
@@ -27,9 +28,10 @@ def detect_arbitrage_opportunities(funding_threshold=0.004, price_threshold=2.0)
     # Sort by highest opportunity (combined spread)
     opportunities.sort(key=lambda x: max(x['funding_diff'], x['price_diff']), reverse=True)
     return opportunities
-
+        
 if __name__ == "__main__":
     print("Scanning for arbitrage opportunities...")
+    # opps = asyncio.run(detect_arbitrage_opportunities())
     opps = detect_arbitrage_opportunities()
     if opps:
         print(f"Found {len(opps)} opportunity(ies):\n")
