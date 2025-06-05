@@ -3,8 +3,14 @@ bybit:
   api_key: lkwUK5mL1xkWExdV2R
   api_secret: 4bhbkKaafpTN4Dd0mE7gScgLkfqdy3mc4vfs
 hyperliquid:
-  api_key: '0x25079223ab397678d573a167da1d2ac51fb8a376d73744583b608a6b22b1a96e'
-  wallet: '0x806ec9f3c9cfd5a40a8f01b6a1ac795496f9a08b'
+  api_key: 0x25079223ab397678d573a167da1d2ac51fb8a376d73744583b608a6b22b1a96e
+  wallet: 0x806ec9f3c9cfd5a40a8f01b6a1ac795496f9a08b
+gmx:
+  private_key: 0x9f9b3498017d7f2e54e890fd4ab37b0663923eda466bae6bcebab15bb3f56601
+  wallet_address: 0x50A044565EbCd9dD99887c8cDB5E394ea9aDfF4B
+dydx:
+  wallet: dydx1sa2af2q4eryps6p0zzvxxjtklny9jmx2ues7a3
+  secret: review shoulder tomato century coach laundry paper wonder cry repair crew basic inmate tennis moment brother hand ten stadium toddler buyer differ near surround
 thresholds:
   funding_diff: 0.005
   price_diff: 2.0

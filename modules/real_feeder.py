@@ -1,6 +1,6 @@
 import requests
-from gql import gql, Client
-from gql.transport.aiohttp import AIOHTTPTransport
+from utils.logger import logger
+from config.config_loader import get_config
 
 def fetch_from_hyperliquid():
     try:
@@ -74,10 +74,10 @@ def fetch_from_dydx():
     
 def fetch_from_gmx():
     try:
-        # Correct v2 subgraph URL
-        url = "https://api.thegraph.com/subgraphs/name/gmx-io/gmx-arbitrum"
+        config = get_config()
+        API_KEY = config['gmx']['private_key']
+        url = f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/2SJf7yp8pNwcc9K6U8YLDNMbwH4TukKbUt8pFqHdL8ug"
 
-        # Updated query (tailored to GMX v2 schema)
         query = """
         {
         tokens(first: 10) {
@@ -87,7 +87,6 @@ def fetch_from_gmx():
         }
 
         fundingRates(first: 10, orderBy: timestamp, orderDirection: desc) {
-            id
             token {
             id
             symbol
@@ -99,21 +98,7 @@ def fetch_from_gmx():
         """
 
         response = requests.post(url, json={'query': query})
-        data = response.json()
-
-        # Parse tokens and map by ID
-        tokens = {t['id']: {'symbol': t['symbol'], 'price': float(t['price'])} for t in data['data']['tokens']}
-
-        # Attach funding rates
-        for f in data['data']['fundingRates']:
-            token_id = f['token']['id']
-            if token_id in tokens:
-                tokens[token_id]['fundingRate'] = float(f['fundingRate'])
-
-        # Print results
-        for t in tokens.values():
-            print(f"{t['symbol']}: Price = ${t['price']:.4f}, Funding Rate = {t.get('fundingRate', 'N/A')}")
-
+        return {}
 
     except Exception as e:
         print(f"GMX error: {e}")
@@ -124,5 +109,5 @@ def fetch_funding_data():
     funding_data.update(fetch_from_hyperliquid())
     funding_data.update(fetch_from_bybit())  # will overwrite Hyperliquid coins if symbol matches
     funding_data.update(fetch_from_dydx())
-    funding_data.update(fetch_from_gmx())
+    # funding_data.update(fetch_from_gmx())
     return funding_data
