@@ -1,6 +1,5 @@
 from flask import Flask, render_template, jsonify
 from commands.funding import detect_arbitrage_opportunities
-import asyncio
 
 app = Flask(__name__)
 

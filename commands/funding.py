@@ -1,34 +1,41 @@
 from funding_dashboard.dashboard import fetch_realtime_funding_data
-import asyncio
 
 def detect_arbitrage_opportunities(funding_threshold=0.004, price_threshold=2.0):
     data = fetch_realtime_funding_data()
     opportunities = []
 
     exchanges = list(data.keys())
-    for i in range(len(exchanges)):
-        for j in range(i + 1, len(exchanges)):
-            ex1 = exchanges[i]
-            ex2 = exchanges[j]
-            rate_diff = abs(data[ex1]['funding_rate'] - data[ex2]['funding_rate'])
-            price_diff = abs(data[ex1]['price'] - data[ex2]['price'])
 
-            if rate_diff >= funding_threshold or price_diff >= price_threshold:
-                opportunities.append({
-                    "exchange_1": ex1,
-                    "exchange_2": ex2,
-                    "funding_rate_1": data[ex1]['funding_rate'],
-                    "funding_rate_2": data[ex2]['funding_rate'],
-                    "price_1": data[ex1]['price'],
-                    "price_2": data[ex2]['price'],
-                    "funding_diff": round(rate_diff, 4),
-                    "price_diff": round(price_diff, 2)
-                })
-
-    # Sort by highest opportunity (combined spread)
-    opportunities.sort(key=lambda x: max(x['funding_diff'], x['price_diff']), reverse=True)
+    for asset1 in data[exchanges[0]]:
+        ex1 = exchanges[0]
+        coin = asset1['coin']
+        price1 = asset1['price']
+        funding1 = asset1['funding_rate']
+        coin_len = len(coin)
+        for asset2 in data[exchanges[1]]:
+            if(asset1['coin'] == asset2['coin'][:coin_len]):
+                ex2 = exchanges[1]
+                price2 = asset2['price']
+                funding2 = asset2['funding_rate']
+        for asset3 in data[exchanges[2]]:
+            if(asset1['coin'] == asset3['coin'][:coin_len]):
+                ex3 = exchanges[1]
+                price3 = asset3['price']
+                funding3 = asset3['funding_rate']
+        opportunities.append({
+            'coin': coin,
+            'ex1': ex1,
+            'price1': price1,
+            'funding1': funding1,
+            'ex2': ex2,
+            'price2': price2,
+            'funding2': funding2,
+            'ex3': ex3,
+            'price3': price3,
+            'funding3': funding3
+        })
     return opportunities
-        
+
 if __name__ == "__main__":
     print("Scanning for arbitrage opportunities...")
     # opps = asyncio.run(detect_arbitrage_opportunities())
