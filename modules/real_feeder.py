@@ -1,5 +1,4 @@
 import requests
-from utils.logger import logger
 from config.config_loader import get_config
 
 def fetch_from_hyperliquid():
@@ -75,29 +74,34 @@ def fetch_from_dydx():
 def fetch_from_gmx():
     try:
         config = get_config()
-        API_KEY = config['gmx']['private_key']
+        API_KEY = str(config['gmx']['private_key'])
         url = f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/2SJf7yp8pNwcc9K6U8YLDNMbwH4TukKbUt8pFqHdL8ug"
 
         query = """
         {
-        tokens(first: 10) {
-            id
-            symbol
-            price
-        }
-
-        fundingRates(first: 10, orderBy: timestamp, orderDirection: desc) {
-            token {
-            id
-            symbol
+            tokens(first: 10) {
+                id
+                symbol
+                price
             }
-            fundingRate
-            timestamp
-        }
+
+            fundingRates(first: 10, orderDirection: desc) {
+                token {
+                id
+                symbol
+                }
+                fundingRate
+            }
         }
         """
+        
+        headers = {
+           "Content-Type": "application/json"
+        }
 
-        response = requests.post(url, json={'query': query})
+        response = requests.post(url, headers=headers, json={'query': query})
+        data = response.json()
+        print(data, '----------------------')
         return {}
 
     except Exception as e:
@@ -109,5 +113,4 @@ def fetch_funding_data():
     funding_data.update(fetch_from_hyperliquid())
     funding_data.update(fetch_from_bybit())  # will overwrite Hyperliquid coins if symbol matches
     funding_data.update(fetch_from_dydx())
-    # funding_data.update(fetch_from_gmx())
     return funding_data

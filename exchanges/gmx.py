@@ -1,11 +1,13 @@
 from exchanges.base_exchange import BaseExchange
 from utils.logger import logger
+from config.config_loader import get_config
 
 class Gmx(BaseExchange):
     def __init__(self, api_key=None, api_secret=None):
-        self.api_key = api_key
-        self.api_secret = api_secret
-        self.positions = {{}}
+        config = get_config()
+        self.api_key = config['gmx']['private_key']
+        self.api_secret = config['gmx']['wallet_address']
+        self.positions = {}
         self.balance = 10000
         self.funding_rate = 0.01
 
@@ -16,14 +18,14 @@ class Gmx(BaseExchange):
     def open_position(self, coin, size, leverage, order_type="limit"):
         logger.info(f"[Gmx] Opening position | Coin: {{coin}}, Size: {{size}}, Leverage: {{leverage}}, Order Type: {{order_type}}")
         position_id = f"{{coin}}_long"
-        self.positions[position_id] = {{
+        self.positions[position_id] = {
             "coin": coin,
             "size": size,
             "leverage": leverage,
             "order_type": order_type,
             "entry_price": 100,
             "funding": self.funding_rate * size
-        }}
+        }
         logger.info(f"[Gmx] Position opened: {{self.positions[position_id]}}")
         return position_id
 

@@ -136,13 +136,13 @@
         <input type="number" id="leverage" placeholder="Enter leverage" style="width: -webkit-fill-available;"/>
       </div>
       <div class="form-group">
-        <label for="orderType">Order Type</label>
-        <select id="orderType">
-          <option value="market">Market</option>
-          <option value="limit">Limit</option>
-        </select>
+        <label for="limit">Limit</label>
+        <input type="number" id="limit" placeholder="Enter limit" style="width: -webkit-fill-available;"/>
       </div>
-      <button>Submit Order</button>
+      <button onclick="open_position()">OPEN POSITION</button>
+      <div id="opened_ex">
+
+      </div>
     </div>
   </div>
 
@@ -170,6 +170,52 @@
       });
     }
     
+    async function open_position() {
+      var exchange = document.getElementById('exchange').value;
+      var size = document.getElementById('size').value;
+      var leverage = document.getElementById('leverage').value;
+      var limit = document.getElementById('limit').value;
+      var coin = document.getElementById('symbol').value;
+      const data = {
+        'exchange': exchange,
+        'size': size,
+        'leverage': leverage,
+        'limit': limit,
+        'coin': coin
+      };
+
+      const open_po = await fetch('/api/open_position', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      const opened = document.getElementById("opened_ex");
+      opened.innerHTML = 
+        "<div style='display: flex; justify-content: space-around' id='close_ex' ex='" + data['exchange'] + "'>" +
+          "<p>" + data['exchange'] + "</p>" +
+          "<a style='margin: auto' href='javascript:;' onclick='close_position()'>" + "CLOSE POSITION" + "</a>" +
+        "</div>";
+    }
+
+    async function close_position() {
+      const close = document.getElementById('close_ex');
+      const ex = close.getAttribute("ex");
+      const data = {
+        'exchange': ex
+      };
+      console.log(ex, '--------------------')
+      const close_po = await fetch('/api/close_position', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      const closed = document.getElementById(ex);
+      closed.remove();
+    }
     fetchData();
     setInterval(fetchData, 5000); // Refresh every 5 seconds
   </script>

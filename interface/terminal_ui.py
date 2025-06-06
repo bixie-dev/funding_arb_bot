@@ -1,12 +1,12 @@
 
 import asyncio
-from modules.real_feeder import RealFundingFeeder
+from modules.real_feeder import fetch_funding_data
 
 def print_funding_update(data):
     print(f"[{data['exchange'].upper()}] {data['coin']}: Funding {data['funding_rate']} | Spread {data['spread']}")
 
 async def main():
-    feeder = RealFundingFeeder(print_funding_update)
+    feeder = fetch_funding_data(print_funding_update)
     await feeder.start()
 
 if __name__ == '__main__':
