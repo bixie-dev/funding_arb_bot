@@ -41,6 +41,7 @@ def api_open_position():
 def api_close_position():
     data = request.get_json()
     exchange = data.get("exchange")
+    print(exchange, '--------------------exchange-----------------')
     if exchange == "hyperliquid":
         client = Hyperliquid()
     elif exchange == "bybit":
@@ -50,7 +51,7 @@ def api_close_position():
     elif exchange == "dydx":
         client = Dydx()
     position_id = client.get_open_positions()
-    print(position_id, '------------------------------')
+    print(position_id, '----------------position_id--------------')
     result = client.close_position(position_id)
     if result == True:
         return True

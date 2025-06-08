@@ -1,0 +1,15 @@
+[2025-06-06 10:45:07,094] INFO - [Hyperliquid] Opening position | Coin: {coin}, Size: {size}, Leverage: {leverage}, Order Type: {order_type}
+[2025-06-06 10:45:07,094] INFO - [Hyperliquid] Position opened: {self.positions[position_id]}
+[2025-06-06 10:47:20,403] INFO - [Hyperliquid] Opening position | Coin: {coin}, Size: {size}, Leverage: {leverage}, Order Type: {order_type}
+[2025-06-06 10:47:20,403] INFO - [Hyperliquid] Position opened: {self.positions[position_id]}
+[2025-06-06 10:49:57,908] INFO - [Hyperliquid] Opening position | Coin: {coin}, Size: {size}, Leverage: {leverage}, Order Type: {order_type}
+[2025-06-06 10:49:57,908] INFO - [Hyperliquid] Position opened: {self.positions[position_id]}
+[2025-06-06 10:51:04,356] INFO - [Hyperliquid] Opening position | Coin: {coin}, Size: {size}, Leverage: {leverage}, Order Type: {order_type}
+[2025-06-06 10:51:04,357] INFO - [Hyperliquid] Position opened: {self.positions[position_id]}
+[2025-06-06 10:57:10,043] INFO - [Hyperliquid] Opening position | Coin: {coin}, Size: {size}, Leverage: {leverage}, Order Type: {order_type}
+[2025-06-06 10:57:10,043] INFO - [Hyperliquid] Position opened: {self.positions[position_id]}
+[2025-06-06 10:57:13,987] INFO - [Hyperliquid] Open positions: {self.positions}
+[2025-06-06 11:42:05,615] INFO - [Hyperliquid] Opening position | Coin: {coin}, Size: {size}, Leverage: {leverage}, Order Type: {order_type}
+[2025-06-06 11:42:05,728] INFO - [Hyperliquid] Position opened: {self.positions[position_id]}
+[2025-06-06 11:42:10,346] INFO - [Hyperliquid] Open positions: {self.positions}
+[2025-06-06 11:42:12,518] INFO - [Hyperliquid] Open positions: {self.positions}

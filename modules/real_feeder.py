@@ -73,9 +73,9 @@ def fetch_from_dydx():
     
 def fetch_from_gmx():
     try:
-        config = get_config()
-        API_KEY = str(config['gmx']['private_key'])
-        url = f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/2SJf7yp8pNwcc9K6U8YLDNMbwH4TukKbUt8pFqHdL8ug"
+        # config = get_config()
+        # API_KEY = str(config['gmx']['private_key'])
+        url = "https://gmx-integration-cg.vercel.app/api/arbitrum/pairs"
 
         query = """
         {

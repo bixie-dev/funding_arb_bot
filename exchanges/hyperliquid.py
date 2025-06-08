@@ -7,7 +7,6 @@ class Hyperliquid(BaseExchange):
         config = get_config()
         self.api_key = config['hyperliquid']['api_key']
         self.api_secret = config['hyperliquid']['wallet']
-        self.positions = {}
         self.balance = 10000
         self.funding_rate = 0.01
 
@@ -18,7 +17,7 @@ class Hyperliquid(BaseExchange):
     def open_position(self, coin, size, leverage, order_type="limit"):
         logger.info(f"[Hyperliquid] Opening position | Coin: {{coin}}, Size: {{size}}, Leverage: {{leverage}}, Order Type: {{order_type}}")
         position_id = f"{{coin}}_long"
-        self.positions[position_id] = {
+        Hyperliquid.positions[position_id] = {
             "coin": coin,
             "size": size,
             "leverage": leverage,
@@ -39,8 +38,8 @@ class Hyperliquid(BaseExchange):
 
     def get_open_positions(self):
         logger.info(f"[Hyperliquid] Open positions: {{self.positions}}")
-        print(self, '==========================================')
-        return self.positions
+        print(self.api_key, self.api_secret, Hyperliquid.positions, self.balance, self.funding_rate, '==========================================')
+        return Hyperliquid.positions
 
     def get_funding_rate(self, coin):
         logger.info(f"[Hyperliquid] Funding rate for {{coin}}: {{self.funding_rate}}")
