@@ -11,6 +11,12 @@ gmx:
 dydx:
   wallet: dydx1sa2af2q4eryps6p0zzvxxjtklny9jmx2ues7a3
   secret: review shoulder tomato century coach laundry paper wonder cry repair crew basic inmate tennis moment brother hand ten stadium toddler buyer differ near surround
+Drift:
+  Phantom: 7pukzCe5Y8CdMKh4Ty51StMoxH3QMLf9yMM4FzvRhKiJ
+  Key: 3pPeEVjLfLqSZUEACz3gdpCPUFvi4S3rUFKT5WFUUec5ZASmm6eJtVpQURK6A58nxVukv9CSj5F5AYrMue6S7M2S
+Lighter:
+  api_auth: 0x25079223ab397678d573a167da1d2ac51fb8a376d73744583b608a6b22b1a96e
+  web3_provider_url: https://mainnet.base.org
 thresholds:
   funding_diff: 0.005
   price_diff: 2.0

@@ -13,15 +13,20 @@ def detect_arbitrage_opportunities(funding_threshold=0.004, price_threshold=2.0)
         funding1 = asset1['funding_rate']
         coin_len = len(coin)
         for asset2 in data[exchanges[1]]:
-            if(asset1['coin'] == asset2['coin'][:coin_len]):
+            if(coin == asset2['coin'][:coin_len]):
                 ex2 = exchanges[1]
                 price2 = asset2['price']
                 funding2 = asset2['funding_rate']
         for asset3 in data[exchanges[2]]:
-            if(asset1['coin'] == asset3['coin'][:coin_len]):
-                ex3 = exchanges[1]
+            if(coin == asset3['coin'][:coin_len]):
+                ex3 = exchanges[2]
                 price3 = asset3['price']
                 funding3 = asset3['funding_rate']
+        for asset8 in data[exchanges[4]]:
+            if(coin == asset8['coin'][:coin_len]):
+                ex8 = exchanges[4]
+                price8 = asset8['price']
+                funding8 = asset8['funding_rate']
         opportunities.append({
             'coin': coin,
             'ex1': ex1,
@@ -32,7 +37,10 @@ def detect_arbitrage_opportunities(funding_threshold=0.004, price_threshold=2.0)
             'funding2': funding2,
             'ex3': ex3,
             'price3': price3,
-            'funding3': funding3
+            'funding3': funding3,
+            'ex8': ex8,
+            'price8': price8,
+            'funding8': funding8
         })
     return opportunities
 
