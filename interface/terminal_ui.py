@@ -19,7 +19,7 @@ def render_table(opportunities):
     table.add_column("GMX", justify="center", style="bold")
     table.add_column("Derive", justify="center", style="bold")
     table.add_column("Lighter", justify="center", style="bold")
-    table.add_column("Mexc", justify="center", style="bold")
+    table.add_column("Gate", justify="center", style="bold")
 
     for opp in opportunities:
         # status = "[green]PROFITABLE[/green]" if opp["price_diff"] > 1 or opp["funding_diff"] > 0.01 else "[red]SKIP[/red]"

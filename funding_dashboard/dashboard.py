@@ -9,6 +9,6 @@ import os
 from modules.real_feeder import fetch_funding_data
     # print("📡 Using real-time funding data (real_feeder)")
 
-def fetch_realtime_funding_data():
-    funding_data = fetch_funding_data()
+async def fetch_realtime_funding_data():
+    funding_data = await fetch_funding_data()
     return funding_data

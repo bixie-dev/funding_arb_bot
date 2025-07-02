@@ -4,220 +4,351 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Funding Rates Dashboard</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
       margin: 0;
       padding: 0;
-      display: flex;
+      background-color: #10141F;
+      color: white;
     }
     .container {
       display: flex;
-      width: 100%;
-    }
-    .table-section {
-      flex: 3;
+      flex-direction: row;
       padding: 20px;
+      gap: 20px;
     }
-    .panel-section {
-      flex: 1;
-      background-color: #ffffff;
-      padding: 20px;
-      border-left: 1px solid #ddd;
+    .board {
+      height: 80vh;
+      overflow-y: scroll;
     }
     table {
-      width: 100%;
       border-collapse: collapse;
-      font-size: 14px;
+      width: 100%;
+      color: white;
     }
     th, td {
-      padding: 8px 12px;
-      border: 1px solid #ddd;
+      border: 1px solid #444;
+      padding: 8px;
       text-align: center;
     }
     th {
-      background-color: #f1f1f1;
-    }
-    tr:nth-child(even) {
-      background-color: #fefefe;
-    }
-    .green { color: green; }
-    .red { color: red; }
-    .orange { color: orange; }
-    .form-group {
-      margin-bottom: 15px;
+      background-color: #202530;
     }
     label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+      margin-top: 10px;
     }
-    select, input[type="number"] {
-      width: 100%;
+    .panel {
+      background-color: #1c1f2a;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+    }
+    select, input, button {
+      margin-top: 10px;
+      width: -webkit-fill-available;
       padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #28a745;
+      background-color: #2c3140;
       color: white;
       border: none;
       border-radius: 4px;
-      cursor: pointer;
+      margin-bottom: 10px;
     }
-    button:hover {
-      background-color: #218838;
-    }
-    .profitable {
-        color:rgb(0, 17, 255);
-    }
-    .skip {
-        color: #ff4040;
+    .bottom-panel {
+      padding: 20px;
+      background-color: #181d28;
+      color: white;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="table-section">
+    <div class="board" style="flex: 1;">
       <h2>Funding Rates Dashboard</h2>
       <table id="arb-table">
-        <thead>
+        <thead id="symbols">
           <tr>
             <th>Symbol</th>
-            <th>Hyperliquid<br>(Price/Funding Rate)</th>
-            <th>Bybit<br>(Price/Funding Rate)</th>
-            <th>Dydx<br>(Price/Funding Rate)</th>
-            <th>Drift<br>(Price/Funding Rate)</th>
-            <th>GMX<br>(Price/Funding Rate)</th>
-            <th>Derive<br>(Price/Funding Rate)</th>
-            <th>Lighter<br>(Price/Funding Rate)</th>
-            <th>Gate.io<br>(Price/Funding Rate)</th>
+            <th>Hyperliquid</th>
+            <th>Bybit</th>
+            <th>Dydx</th>
+            <th>Drift</th>
+            <th>Derive</th>
+            <th>Gate.io</th>
+            <th>Lighter</th>
           </tr>
         </thead>
         <tbody>
+
         </tbody>
       </table>
     </div>
 
-    <div class="panel-section">
-      <h3>Trading Panel</h3>
-      <div class="form-group">
-        <label for="symbol">Coin</label>
-        <select id="symbol">
-          <option>BTC</option>
-          <option>ETH</option>
-          <option>ATOM</option>
-          <option>MATIC</option>
-          <option>DYDX</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="exchange">Exchange</label>
-        <select id="exchange">
-          <option value="hyperliquid">Hyperliquid</option>
-          <option value="bybit">Bybit</option>
-          <option value="dydx">Dydx</option>
-          <option value="drift">Drift</option>
-          <option value="gmx">GMX</option>
-          <option value="derive">Derive</option>
-          <option value="lighter">Lighter</option>
-          <option value="mexc">Mexc</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="size">Size</label>
-        <input type="number" id="size" placeholder="Enter position size" style="width: -webkit-fill-available;"/>
-      </div>
-      <div class="form-group">
-        <label for="leverage">Leverage</label>
-        <input type="number" id="leverage" placeholder="Enter leverage" style="width: -webkit-fill-available;"/>
-      </div>
-      <div class="form-group">
-        <label for="limit">Limit</label>
-        <input type="number" id="limit" placeholder="Enter limit" style="width: -webkit-fill-available;"/>
-      </div>
-      <button onclick="open_position()">OPEN POSITION</button>
-      <div id="opened_ex">
-
-      </div>
+    <div class="panel">
+      <h3>Trade Panel</h3>
+      <label>COIN:</label>
+      <input id="symbol" type="text" placeholder="ETH">
+      <label>Long Exchange:</label>
+      <select id="long_ex">
+        <option value="Hyperliquid">Hyperliquid</option>
+        <option value="Bybit">Bybit</option>
+        <option value="Dydx">Dydx</option>
+        <option value="Drift">Drift</option>
+        <option value="GMX">GMX</option>
+        <option value="Derive">Derive</option>
+        <option value="Lighter">Lighter</option>
+        <option value="Gate.io">Gate.io</option>
+      </select>
+      <label>Short Exchange:</label>
+      <select id="short_ex">
+        <option value="Hyperliquid">Hyperliquid</option>
+        <option value="Bybit">Bybit</option>
+        <option value="Dydx">Dydx</option>
+        <option value="Drift">Drift</option>
+        <option value="GMX">GMX</option>
+        <option value="Derive">Derive</option>
+        <option value="Lighter">Lighter</option>
+        <option value="Gate.io">Gate.io</option>
+      </select>
+      <label>Order Type:</label>
+      <select id="order">
+        <option value="market">Market</option>
+        <option value="limit">Limit</option>
+      </select>
+      <label>Amount:</label>
+      <input id="amount" type="number" placeholder="$0">
+      <label>Leverage:</label>
+      <input id="leverage" type="number" placeholder="0">
+      <button class="open_po">Submit Order</button>
     </div>
   </div>
 
-  <script>
+  <div class="bottom-panel">
+    <h3>Open Positions</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Exchange</th>
+          <th>Market</th>
+          <th>Entry Price</th>
+          <th>Market Price</th>
+          <th>PnL</th>
+          <th>Funding Fee</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="opened_ex">
+        <!-- Add more rows here -->
+      </tbody>
+    </table>
+  </div>
+
+<script>
+  $(document).ready(function(){
+    var data;
+    fetchData();
+    setInterval(fetchData, 10000); // Refresh every 10 seconds
+    var data;
+    var market_price1 = 0, market_price2 = 0;
+    var funding_fee1 = 0, funding_fee2 = 0;
+    var funding_rate1 = 0, funding_rate2 = 0;
+    var PnL1 = 0, PnL2 = 0;
     async function fetchData() {
       const res = await fetch('/api/arbitrage');
-      const data = await res.json();
+      data = await res.json();
+      var thead = document.querySelector('#symbols tr');
+      var tr = "<th>Symbol</th>";
+      data['balances'].foreach(row => {
+        const th = document.createElement('th');
+        th += `
+          ${row.ex} / ${row.balance}
+        `
+      })
+      thead.innerHTML = tr;
       const tbody = document.querySelector('#arb-table tbody');
       tbody.innerHTML = '';
 
-      data.forEach(row => {
+      data['data'].forEach(row => {
         const tr = document.createElement('tr');
+        if(row.price1 == 0) {
+          row.price1 = 'N';
+        }
+        if(row.price2 == 0) {
+          row.price2 = 'N';
+        }
+        if(row.price3 == 0) {
+          row.price3 = 'N';
+        }
+        if(row.price4 == 0) {
+          row.price4 = 'N';
+        }
+        if(row.price5 == 0) {
+          row.price5 = 'N';
+        }
+        if(row.price8 == 0) {
+          row.price8 = 'N';
+        }
+        if(row.funding1 == 0) {
+          row.funding1 = 'A';
+        }
+        if(row.funding2 == 0) {
+          row.funding2 = 'A';
+        }
+        if(row.funding3 == 0) {
+          row.funding3 = 'A';
+        }
+        if(row.funding4 == 0) {
+          row.funding4 = 'A';
+        }
+        if(row.funding5 == 0) {
+          row.funding5 = 'A';
+        }
+        if(row.funding8 == 0) {
+          row.funding8 = 'A';
+        }
         tr.innerHTML = `
           <td>${row.coin}</td>
           <td>${row.price1}/${row.funding1}</td>
           <td>${row.price2}/${row.funding2}</td>
           <td>${row.price3}/${row.funding3}</td>
-          <td>${row.coin}</td>
-          <td>${row.coin}</td>
-          <td>${row.coin}</td>
-          <td>${row.coin}</td>
+          <td>${row.price4}/${row.funding4}</td>
+          <td>${row.price5}/${row.funding5}</td>
           <td>${row.price8}/${row.funding8}</td>
+          <td>${row.price6}/${row.funding6}</td>
         `;
         tbody.appendChild(tr);
       });
     }
     
-    async function open_position() {
-      var exchange = document.getElementById('exchange').value;
-      var size = document.getElementById('size').value;
-      var leverage = document.getElementById('leverage').value;
-      var limit = document.getElementById('limit').value;
+    $(".open_po").click(function() {
       var coin = document.getElementById('symbol').value;
-      const data = {
-        'exchange': exchange,
-        'size': size,
-        'leverage': leverage,
-        'limit': limit,
-        'coin': coin
+      var long_ex = document.getElementById('long_ex').value;
+      var short_ex = document.getElementById('short_ex').value;
+      var order = document.getElementById('order').value;
+      var amount = document.getElementById('amount').value;
+      var leverage = document.getElementById('leverage').value;
+      const payload = {
+        'coin': coin,
+        'long_ex': long_ex,
+        'short_ex': short_ex,
+        'order': order,
+        'amount': amount,
+        'leverage': leverage
       };
+      var market_price1, market_price2;
+      var funding_fee1, funding_fee2;
+      var funding_rate1, funding_rate2;
+      data['data'].forEach(row => {
+        if(row.coin == coin) {
+          if(long_ex == "Hyperliquid") {
+            market_price1 = row.price1;
+            funding_rate1 = row.funding1;
+          }
+          if(long_ex == "Bybit") {
+            market_price1 = row.price2;
+            funding_rate1 = row.funding2;
+          }
+          if(long_ex == "Dydx") {
+            market_price1 = row.price3;
+            funding_rate1 = row.funding3;
+          }
+          if(long_ex == "Drift") {
+            market_price1 = row.price4;
+            funding_rate1 = row.funding4;
+          }
+          if(long_ex == "Derive") {
+            market_price1 = row.price5;
+            funding_rate1 = row.funding5;
+          }
+          if(long_ex == "Gate") {
+            market_price1 = row.price8;
+            funding_rate1 = row.funding8;
+          }
+          if(long_ex == "Lighter") {
+            market_price1 = row.price2;
+            funding_rate1 = row.funding2;
+          }
+          if(short_ex == "Hyperliquid") {
+            market_price2 = row.price1;
+            funding_rate2 = row.funding1;
+          }
+          if(short_ex == "Bybit") {
+            market_price2 = row.price2;
+            funding_rate2 = row.funding2;
+          }
+          if(short_ex == "Dydx") {
+            market_price2 = row.price3;
+            funding_rate2 = row.funding3;
+          }
+          if(short_ex == "Drift") {
+            market_price2 = row.price4;
+            funding_rate2 = row.funding4;
+          }
+          if(short_ex == "Derive") {
+            market_price2 = row.price5;
+            funding_rate2 = row.funding5;
+          }
+          if(short_ex == "Gate") {
+            market_price2 = row.price8;
+            funding_rate2 = row.funding8;
+          }
+          if(short_ex == "Lighter") {
+            market_price2 = row.price6;
+            funding_rate2 = row.funding6;
+          }
+        }
+      })
+      spread_profit = (market_price2 - market_price1) / market_price1;
+      funding_profit = (funding_rate1 - funding_rate2);
+      total_profit = spread_profit + funding_profit;
+      if(market_price1 != "N" && market_price2 != "N" && funding_rate1 != "A" && funding_rate2 != "A" && (total_profit > 0.002)) {
+        funding_fee1 = amount/market_price1 * funding_rate1;
+        funding_fee2 = amount/market_price2 * funding_rate2;
+        PnL1 = (market_price1 - market_price2) * amount/market_price1 * leverage;
+        PnL2 = (market_price2 - market_price1) * amount/market_price2 * leverage;
+        const open_po = fetch('/api/open_position', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        if(open_po) {
+          const opened = document.getElementById("opened_ex");
+          const tr = document.createElement('tr');
+          tr.innerHTML = 
+            "<td>" + long_ex + "<br>" + short_ex + "</td>" +
+            "<td>" + coin + " " + leverage + " " + 'Long' + "<br>" + coin + " " + leverage + " " + 'Short' + "</td>" +
+            "<td>" + amount + "<br>" + amount + "</td>" +
+            "<td>" + market_price1 + "<br>" + market_price2 + "</td>" +
+            "<td>" + PnL1 + "<br>" + PnL2 + "</td>" +
+            "<td>" + funding_fee1 + "<br>" + funding_fee2 + "</td>" +
+            "<td>" + "<button class='close_po' long_ex='" + long_ex + "' short_ex='" + sho + "'>" + "Close" + "</button>" + "</td>";
+          opened.appendChild(tr);
+        }
+      } else {
+        alert('No arbitrage opportunity.');
+      }
+    })
 
-      const open_po = await fetch('/api/open_position', {
+    $(document).on("click", ".close_po", function() {
+      var long_ex = $(this).attr('long_ex');
+      var short_ex = $(this).attr('short_ex');
+      var data = {
+        long_ex: long_ex,
+        short_ex: short_ex
+      }
+      const close_po = fetch('/api/close_position', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
       });
-      const opened = document.getElementById("opened_ex");
-      opened.innerHTML = 
-        "<div style='display: flex; justify-content: space-around' id='close_ex' ex='" + data['exchange'] + "'>" +
-          "<p>" + data['exchange'] + "</p>" +
-          "<a style='margin: auto' href='javascript:;' onclick='close_position()'>" + "CLOSE POSITION" + "</a>" +
-        "</div>";
-    }
-
-    async function close_position() {
-      const close = document.getElementById('close_ex');
-      const ex = close.getAttribute("ex");
-      const data = {
-        'exchange': ex
-      };
-      console.log(ex, '--------------------')
-      const close_po = await fetch('/api/close_position', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-      const closed = document.getElementById(ex);
-      closed.remove();
-    }
-    fetchData();
-    setInterval(fetchData, 5000); // Refresh every 5 seconds
-  </script>
+      $(this).parent().parent().remove();
+    })
+  })
+</script>
 </body>
 </html>

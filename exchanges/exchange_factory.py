@@ -5,7 +5,7 @@ from exchanges.gmx import Gmx
 from exchanges.drift import Drift
 from exchanges.derive import Derive
 from exchanges.lighter import Lighter
-from exchanges.mexc import Mexc
+from exchanges.gate import Gate
 
 def get_exchange(name):
     name = name.lower()
@@ -23,7 +23,7 @@ def get_exchange(name):
         return Derive()
     elif name == "lighter":
         return Lighter()
-    elif name == "mexc":
-        return Mexc()
+    elif name == "gate":
+        return Gate()
     else:
         raise ValueError(f"Exchange '{name}' is not supported.")

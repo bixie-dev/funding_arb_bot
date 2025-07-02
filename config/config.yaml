@@ -4,19 +4,31 @@ bybit:
   api_secret: 4bhbkKaafpTN4Dd0mE7gScgLkfqdy3mc4vfs
 hyperliquid:
   api_key: 0x25079223ab397678d573a167da1d2ac51fb8a376d73744583b608a6b22b1a96e
+  api_secret: pleaes add api_secret
   wallet: 0x806ec9f3c9cfd5a40a8f01b6a1ac795496f9a08b
 gmx:
   private_key: 0x9f9b3498017d7f2e54e890fd4ab37b0663923eda466bae6bcebab15bb3f56601
-  wallet_address: 0x50A044565EbCd9dD99887c8cDB5E394ea9aDfF4B
+  rpc_url: https://arb1.arbitrum.io/rpc
+  chain_id: 42161
+derive: 
+  address: 0xF79fA146Ed0fA9c1eE0C07A23fBE2715619c84fe
+  Session_Key: 0x8a04b68f76a53e148149cb55fff0a092a86f9c21f345021c48c8d060badc68a2
+  account_id: please add account_id
 dydx:
   wallet: dydx1sa2af2q4eryps6p0zzvxxjtklny9jmx2ues7a3
   secret: review shoulder tomato century coach laundry paper wonder cry repair crew basic inmate tennis moment brother hand ten stadium toddler buyer differ near surround
-Drift:
-  Phantom: 7pukzCe5Y8CdMKh4Ty51StMoxH3QMLf9yMM4FzvRhKiJ
-  Key: 3pPeEVjLfLqSZUEACz3gdpCPUFvi4S3rUFKT5WFUUec5ZASmm6eJtVpQURK6A58nxVukv9CSj5F5AYrMue6S7M2S
-Lighter:
-  api_auth: 0x25079223ab397678d573a167da1d2ac51fb8a376d73744583b608a6b22b1a96e
-  web3_provider_url: https://mainnet.base.org
+drift:
+  user_address: 7pukzCe5Y8CdMKh4Ty51StMoxH3QMLf9yMM4FzvRhKiJ
+  api_key: 3pPeEVjLfLqSZUEACz3gdpCPUFvi4S3rUFKT5WFUUec5ZASmm6eJtVpQURK6A58nxVukv9CSj5F5AYrMue6S7M2S
+gate:
+  api_key: 6aed796b4703423ed94573f101efff93
+  api_secret: 8393457c3c3a8461c798b1894439b0a33faaa9390ef4ebfa393a2b1ed701b61f
+lighter:
+  web3_provider_url: 'https://testnet.zklighter.elliot.ai/'
+  api_auth: '0x015b8cdfc9119930ba0bc3e6fccef98672da35a196fa099ece46df37515a3d404195dbb0ee61d92c'
+  ACCOUNT_INDEX: 218
+  API_KEY_INDEX: 1
+  # 36b79a7b8bd777b5b5494df71ac1ad07d2d1c68d117764088a58726bb8cd3856
 thresholds:
   funding_diff: 0.005
   price_diff: 2.0

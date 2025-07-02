@@ -4,7 +4,7 @@ import time
 import random
 
 def fetch_funding_data():
-    exchanges = ["Bybit", "Hyperliquid", "Dydx", "Drift", "GMX", "Derive", "Lighter", "Mexc"]
+    exchanges = ["Bybit", "Hyperliquid", "Dydx", "Drift", "GMX", "Derive", "Lighter", "Gate"]
     coins = ['BTC', 'ETH', 'SOL', 'AVAX']
     data = {}
     for ex in exchanges:

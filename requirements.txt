@@ -1,3 +1,17 @@
 flask
 rich
 websockets
+pybit
+python-dotenv
+dydx-v3-python
+web3
+solders
+anchorpy
+eth-account
+requests
+nest_asyncio
+gate-api
+solana
+ccxt
+pandas
+matplotlib

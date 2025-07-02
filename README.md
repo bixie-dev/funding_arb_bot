@@ -48,7 +48,7 @@ This bot helps detect and optionally auto-execute funding or price arbitrage opp
 -GMX
 -Derive
 -Lighter
--Mexc 
+-Gate.io 
 
 ## 📁 Project Structure
 

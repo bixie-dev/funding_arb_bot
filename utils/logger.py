@@ -10,7 +10,7 @@ def setup_logger(name="funding_bot", log_file="logs/bot.log", level=logging.INFO
     # Avoid duplicate handlers if already setup
     if not logger.handlers:
         # File handler
-        fh = logging.FileHandler(log_file)
+        fh = logging.FileHandler(log_file, encoding="utf-8")
         fh.setLevel(level)
 
         # Console handler
